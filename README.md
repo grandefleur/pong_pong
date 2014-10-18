@@ -1,7 +1,6 @@
 import pygame, sys
 from pygame.locals import *
 
-#задать скорость мячика
 FPS = 200
 WINDOWWIDTH = 400
 WINDOWHEIGHT = 300
@@ -9,29 +8,26 @@ LINETHICKNESS = 10
 PADDLESIZE = 50
 PADDLEOFFSET = 20
 
-#Настройка цвета
 BLACK     = (0  ,0  ,0  )
 WHITE     = (255,255,255)
 
-#прорисовка поля игры 
 def drawArena():
     DISPLAYSURF.fill((0,0,0))
-    #рисовка границ поля
+
     pygame.draw.rect(DISPLAYSURF, WHITE, ((0,0),(WINDOWWIDTH,WINDOWHEIGHT)), LINETHICKNESS*2)
-    #линия раздела
+   
     pygame.draw.line(DISPLAYSURF, WHITE, ((WINDOWWIDTH/2),0),((WINDOWWIDTH/2),WINDOWHEIGHT), (LINETHICKNESS/4))
 
-#рисовка ракеток
 def drawPaddle(paddle):
     if paddle.bottom > WINDOWHEIGHT - LINETHICKNESS:
         paddle.bottom = WINDOWHEIGHT - LINETHICKNESS
-    #регуляция движения
+    
     elif paddle.top < LINETHICKNESS:
         paddle.top = LINETHICKNESS
-    #рисовка ракетки
+    
     pygame.draw.rect(DISPLAYSURF, WHITE, paddle)
 
-#рисовка мяча
+
 def drawBall(ball):
     pygame.draw.rect(DISPLAYSURF, WHITE, ball)
 
@@ -111,12 +107,12 @@ def main():
     paddle2 = pygame.Rect(WINDOWWIDTH - PADDLEOFFSET - LINETHICKNESS, playerTwoPosition, LINETHICKNESS,PADDLESIZE)
     ball = pygame.Rect(ballX, ballY, LINETHICKNESS, LINETHICKNESS)
 
-    #рисует начальные позиции
+    
     drawArena()
     drawPaddle(paddle1)
     drawPaddle(paddle2)
     drawBall(ball)
-    pygame.mouse.set_visible(0) #делает курсор невидимым
+    pygame.mouse.set_visible(0) 
     while True: 
         for event in pygame.event.get():
             if event.type == QUIT:
